@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CPackWiXPatch>
+  <CPackWiXFragment Id="CM_CP_ClipSock.exe">
+    <EventSource xmlns="http://schemas.microsoft.com/wix/UtilExtension"
+                 EventMessageFile="[#CM_FP_ClipSock.exe]"
+                 Log="Application"
+                 Name="ClipSock"
+                 SupportsErrors="yes"
+                 SupportsInformationals="yes"
+                 SupportsWarnings="yes"/>
+  </CPackWiXFragment>
+</CPackWiXPatch>

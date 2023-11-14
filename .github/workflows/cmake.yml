@@ -1,0 +1,42 @@
+name: CMake
+on:
+  workflow_call:
+    inputs: #&inputs
+      preset:
+        description: Workflow preset
+        required: true
+        type: string
+      fetch-tags:
+        description: Fetch tags
+        required: false
+        type: boolean
+      upload-artifact:
+        description: Upload artifact
+        required: false
+        type: boolean
+  # YAML anchors are not supported, which makes it difficult to justify
+  # duplicating inputs for workflow_dispatch as a convenience trigger.
+  # See https://github.com/actions/runner/issues/1182.
+  #workflow_dispatch:
+  #  inputs: *inputs
+jobs:
+  cmake:
+    runs-on: windows-2019
+    steps:
+      - name: Install dependencies
+        if: ${{ contains(inputs.preset, 'Clang') }}
+        run: choco.exe install ninja
+      - uses: actions/checkout@v3
+        # Fetching tags using the checkout action is broken when triggered by
+        # pushing a tag. See https://github.com/actions/checkout/issues/1467.
+        #with:
+        #  fetch-tags: ${{ inputs.fetch-tags }}
+      - name: Fetch tags
+        if: ${{ inputs.fetch-tags }}
+        run: git.exe fetch --force --tags
+      - name: Run CMake workflow
+        run: cmake.exe --workflow --preset ${{ inputs.preset }}
+      - if: ${{ inputs.upload-artifact }}
+        uses: actions/upload-artifact@v3
+        with:
+          path: build/*.msi
