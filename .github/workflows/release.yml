@@ -1,0 +1,30 @@
+name: Release
+on:
+  push:
+    tags:
+      - v*.*.*
+jobs:
+  call-cmake:
+    strategy:
+      matrix:
+        preset:
+          - Release-MSVC-x64
+          - Release-MSVC-x86
+    uses: ./.github/workflows/cmake.yml
+    with:
+      preset: ${{ matrix.preset }}
+      fetch-tags: true
+      upload-artifact: true
+  release:
+    needs: call-cmake
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+      - id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v1
+      - uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ steps.extract-release-notes.outputs.release_notes }}
+          draft: true
+          files: artifact/*

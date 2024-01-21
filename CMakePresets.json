@@ -1,0 +1,178 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 26,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build"
+    },
+    {
+      "name": "Clang",
+      "inherits": "default",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang.exe",
+        "CMAKE_CXX_COMPILER": "clang++.exe"
+      }
+    },
+    {
+      "name": "MSVC",
+      "inherits": "default",
+      "generator": "Visual Studio 16 2019"
+    },
+    {
+      "name": "MSVC-x64",
+      "inherits": "MSVC",
+      "architecture": "x64"
+    },
+    {
+      "name": "MSVC-x86",
+      "inherits": "MSVC",
+      "architecture": "Win32"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Debug-Clang",
+      "configurePreset": "Clang",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Debug-MSVC",
+      "configurePreset": "MSVC",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Release-MSVC-x64",
+      "configurePreset": "MSVC-x64",
+      "configuration": "Release"
+    },
+    {
+      "name": "Release-MSVC-x86",
+      "configurePreset": "MSVC-x86",
+      "configuration": "Release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "default",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "Debug-Clang",
+      "inherits": "default",
+      "configurePreset": "Clang"
+    },
+    {
+      "name": "Debug-MSVC",
+      "inherits": "default",
+      "configurePreset": "MSVC"
+    },
+    {
+      "name": "Release-MSVC-x64",
+      "inherits": "default",
+      "configurePreset": "MSVC-x64"
+    },
+    {
+      "name": "Release-MSVC-x86",
+      "inherits": "default",
+      "configurePreset": "MSVC-x86"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "Release-MSVC-x64",
+      "configurePreset": "MSVC-x64"
+    },
+    {
+      "name": "Release-MSVC-x86",
+      "configurePreset": "MSVC-x86"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "Debug-Clang",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "Clang"
+        },
+        {
+          "type": "build",
+          "name": "Debug-Clang"
+        },
+        {
+          "type": "test",
+          "name": "Debug-Clang"
+        }
+      ]
+    },
+    {
+      "name": "Debug-MSVC",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "MSVC"
+        },
+        {
+          "type": "build",
+          "name": "Debug-MSVC"
+        },
+        {
+          "type": "test",
+          "name": "Debug-MSVC"
+        }
+      ]
+    },
+    {
+      "name": "Release-MSVC-x64",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "MSVC-x64"
+        },
+        {
+          "type": "build",
+          "name": "Release-MSVC-x64"
+        },
+        {
+          "type": "test",
+          "name": "Release-MSVC-x64"
+        },
+        {
+          "type": "package",
+          "name": "Release-MSVC-x64"
+        }
+      ]
+    },
+    {
+      "name": "Release-MSVC-x86",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "MSVC-x86"
+        },
+        {
+          "type": "build",
+          "name": "Release-MSVC-x86"
+        },
+        {
+          "type": "test",
+          "name": "Release-MSVC-x86"
+        },
+        {
+          "type": "package",
+          "name": "Release-MSVC-x86"
+        }
+      ]
+    }
+  ]
+}

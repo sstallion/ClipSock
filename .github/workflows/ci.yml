@@ -1,0 +1,17 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+jobs:
+  call-cmake:
+    strategy:
+      fail-fast: false
+      matrix:
+        preset:
+          - Debug-Clang
+          - Debug-MSVC
+    uses: ./.github/workflows/cmake.yml
+    with:
+      preset: ${{ matrix.preset }}
