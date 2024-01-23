@@ -89,11 +89,18 @@
   ],
   "packagePresets": [
     {
+      "name": "default",
+      "hidden": true,
+      "configurations": ["Release"]
+    },
+    {
       "name": "Release-MSVC-x64",
+      "inherits": "default",
       "configurePreset": "MSVC-x64"
     },
     {
       "name": "Release-MSVC-x86",
+      "inherits": "default",
       "configurePreset": "MSVC-x86"
     }
   ],
