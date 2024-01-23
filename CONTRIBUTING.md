@@ -5,9 +5,10 @@ not have time to contribute!
 
 ## Making Changes
 
-> **Note**: This guide assumes you have a working Windows installation with the
-> latest [Windows SDK][2] installed. [CMake 3.26][3] (or newer) is required to
-> build the project using either [Visual Studio 2019][4] or [Clang 16][5].
+> [!IMPORTANT]
+> This guide assumes you have a working Windows installation with the latest
+> [Windows SDK][2] installed. [CMake 3.26][3] (or newer) is required to build
+> the project using either [Visual Studio 2019][4] or [Clang 16][5].
 
 To get started, [fork][6] this repository on GitHub and clone a working copy for
 development:
@@ -20,8 +21,8 @@ To build the Debug configuration using Visual Studio, issue:
 cmake -B build && cmake --build build
 ```
 
-> **Note**: Once built, the ClipSock executable can be found in the build
-> directory.
+> [!NOTE]
+> Once built, the ClipSock executable can be found in the build directory.
 
 To run tests, issue:
 ```
@@ -68,6 +69,14 @@ To make a release, perform the following:
 6. Review the draft release created by GitHub Actions and make adjustments as
    needed. Once finished, publish the release to make it publicly available.
 
+7. Submit a pull request to the [winget-pkgs][12] repository to update the
+   `ClipSock.ClipSock` package to the latest release using [winget-create][13]:
+   ```
+   wingetcreate update --urls https://github.com/sstallion/ClipSock/releases/download/v<version>/ClipSock-<version>-x64.msi ^
+                              https://github.com/sstallion/ClipSock/releases/download/v<version>/ClipSock-<version>-x86.msi ^
+                       --version <version> ClipSock.ClipSock
+   ```
+
 ## License
 
 By contributing to this repository, you agree that your contributions will be
@@ -84,3 +93,5 @@ licensed under its Simplified BSD License.
 [9]: https://github.com/sstallion/ClipSock/blob/master/CHANGELOG.md
 [10]: https://github.com/sstallion/ClipSock/actions/workflows/ci.yml
 [11]: https://github.com/sstallion/ClipSock/actions/workflows/release.yml
+[12]: https://github.com/microsoft/winget-pkgs
+[13]: https://github.com/microsoft/winget-create
