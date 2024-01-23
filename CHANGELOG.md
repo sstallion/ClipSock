@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2024-01-23
+
 ### Fixed
 
 - Fix missing Start Menu shortcut
@@ -15,5 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release
 
-[Unreleased]: https://github.com/sstallion/ClipSock/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/sstallion/ClipSock/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/sstallion/ClipSock/releases/tag/v1.0.1
 [1.0.0]: https://github.com/sstallion/ClipSock/releases/tag/v1.0.0
