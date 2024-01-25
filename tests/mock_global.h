@@ -42,13 +42,13 @@ class GlobalMock : public testing::NiceMock<T> {
 public:
     MOCK_EXPORT static void SetUp(GlobalMock<T>* pMock)
     {
-        ASSERT_EQ(m_pMock, nullptr);
+        EXPECT_EQ(m_pMock, nullptr);
         m_pMock = pMock;
     }
 
     MOCK_EXPORT static void TearDown()
     {
-        ASSERT_NE(m_pMock, nullptr);
+        EXPECT_NE(m_pMock, nullptr);
         m_pMock = nullptr;
     }
 
