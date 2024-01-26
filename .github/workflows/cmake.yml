@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         if: ${{ contains(inputs.preset, 'Clang') }}
         run: choco.exe install ninja
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         # Fetching tags using the checkout action is broken when triggered by
         # pushing a tag. See https://github.com/actions/checkout/issues/1467.
         #with:
