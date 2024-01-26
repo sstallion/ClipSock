@@ -64,8 +64,8 @@ MOCK_EXPORT int WSAAPI WSAEnumNetworkEvents(SOCKET s,
 }
 
 MOCK_EXPORT int WSAAPI WSAEventSelect(SOCKET s,
-                                              WSAEVENT hEventObject,
-                                              long lNetworkEvents)
+                                      WSAEVENT hEventObject,
+                                      long lNetworkEvents)
 {
     return MockGlobal::Call(&MockWinsock::WSAEventSelect, s, hEventObject, lNetworkEvents);
 }
